@@ -3,6 +3,7 @@ package br.com.lucas.ecommerce;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
+import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -12,21 +13,24 @@ public class NewOrderMain {
 
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		
-		var producer = new KafkaProducer<String, String>(properties());
-		
-		var topic = "ECOMMERCE_NEW_ORDER";
-		var value = "123,456,789";
-		
-		var record = new ProducerRecord<String, String>(topic, value, value);
-
-		producer.send(record, (data, error) -> {
+		Callback callback = (data, error) -> {
 			if(error != null) {
 				error.printStackTrace();
 				return;
 			}
 			System.out.println("sucesso: "+data.topic().concat(" ::: ") + data.partition() + "/" + data.offset() + "/" + data.timestamp());			
-		}).get();
+		};
 		
+		var producer = new KafkaProducer<String, String>(properties());
+		
+		var value = "123,456,789";
+		var record = new ProducerRecord<String, String>("ECOMMERCE_NEW_ORDER", value, value);
+		
+		var email = "Thank you for your order!";
+		var recordEmail = new ProducerRecord<String, String>("ECOMMERCE_SEND_EMAIL", email, email);
+		
+		producer.send(record, callback).get();
+		producer.send(recordEmail, callback).get();
 //		Thread.sleep(50);
 	}
 
