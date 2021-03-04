@@ -18,13 +18,13 @@ public class NewOrderMain {
 		var value = "123,456,789";
 		
 		var record = new ProducerRecord<String, String>(topic, value, value);
-		
+
 		producer.send(record, (data, error) -> {
 			if(error != null) {
 				error.printStackTrace();
 				return;
 			}
-			System.out.println("sucesso: "+data.topic().concat("::: ") + data.partition() + "/" + data.offset() + "/" + data.timestamp());			
+			System.out.println("sucesso: "+data.topic().concat(" ::: ") + data.partition() + "/" + data.offset() + "/" + data.timestamp());			
 		}).get();
 		
 //		Thread.sleep(50);
