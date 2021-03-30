@@ -1,5 +1,7 @@
-package br.com.lucas.ecommerce;
+package br.com.lucas.ecommerce.kafka;
 
+import br.com.lucas.ecommerce.consumers.utils.ConsumerFunction;
+import br.com.lucas.ecommerce.kafka.deserializers.GsonDeserializer;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
@@ -17,12 +19,12 @@ public class KafkaService<T> implements Closeable {
     private final KafkaConsumer<String, T> consumer;
     private final ConsumerFunction parse;
 
-    KafkaService(String groupId, String topic, ConsumerFunction parse, Class<T> type, Map<String, String> properties) {
+    public KafkaService(String groupId, String topic, ConsumerFunction parse, Class<T> type, Map<String, String> properties) {
         this(parse,groupId, type, properties);
         consumer.subscribe(Collections.singletonList(topic));
     }
 
-    KafkaService(String groupId, Pattern topic, ConsumerFunction parse, Class<T> type, Map<String, String> properties) {
+    public KafkaService(String groupId, Pattern topic, ConsumerFunction parse, Class<T> type, Map<String, String> properties) {
         this(parse,groupId, type, properties);
         consumer.subscribe(topic);
     }

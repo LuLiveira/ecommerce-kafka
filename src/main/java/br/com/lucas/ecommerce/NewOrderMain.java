@@ -1,5 +1,8 @@
 package br.com.lucas.ecommerce;
 
+import br.com.lucas.ecommerce.kafka.KafkaDispatcher;
+import br.com.lucas.ecommerce.models.Email;
+import br.com.lucas.ecommerce.models.Order;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
 import java.math.BigDecimal;

@@ -1,9 +1,10 @@
-package br.com.lucas.ecommerce;
+package br.com.lucas.ecommerce.consumers;
 
+import br.com.lucas.ecommerce.kafka.KafkaService;
+import br.com.lucas.ecommerce.models.Email;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class EmailService {
 	

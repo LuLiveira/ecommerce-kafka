@@ -1,4 +1,4 @@
-package br.com.lucas.ecommerce;
+package br.com.lucas.ecommerce.kafka.serializers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -1,4 +1,4 @@
-package br.com.lucas.ecommerce;
+package br.com.lucas.ecommerce.models;
 
 import java.math.BigDecimal;
 
