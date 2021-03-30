@@ -2,10 +2,7 @@ package br.com.lucas.ecommerce.kafka.serializers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.apache.kafka.common.header.Headers;
 import org.apache.kafka.common.serialization.Serializer;
-
-import java.util.Map;
 
 public class GsonSerializer<T> implements Serializer<T> {
 

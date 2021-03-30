@@ -7,11 +7,17 @@
 
 	<groupId>br.com.lucas.ecommerce</groupId>
 	<artifactId>ecommerce</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>service-email</module>
+		<module>service-fraude-detector</module>
+		<module>service-log</module>
+		<module>service-new-order</module>
+		<module>common-kafka</module>
+	</modules>
 
-	<name>ecommerce</name>
-	<!-- FIXME change it to the project's website -->
-	<url>http://www.example.com</url>
+    <name>ecommerce</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

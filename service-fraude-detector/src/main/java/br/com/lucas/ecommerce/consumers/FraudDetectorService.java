@@ -1,7 +1,7 @@
 package br.com.lucas.ecommerce.consumers;
 
+import br.com.lucas.ecommerce.consumers.models.Order;
 import br.com.lucas.ecommerce.kafka.KafkaService;
-import br.com.lucas.ecommerce.models.Order;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.util.HashMap;
