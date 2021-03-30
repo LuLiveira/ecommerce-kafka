@@ -1,9 +1,8 @@
 package br.com.lucas.ecommerce;
 
-import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
-import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
@@ -11,12 +10,20 @@ public class NewOrderMain {
 
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 
-		try(var kafkaDispatcher = new KafkaDispatcher()) {
-			var newOrderMain = new NewOrderMain();
+		try(var kafkaDispatcherOrder = new KafkaDispatcher<Order>()) {
+			try(var kafkaDispatcherEmail = new KafkaDispatcher<String>()) {
 
-			for (int i = 0; i < 10; i++) {
-				kafkaDispatcher.send("ECOMMERCE_NEW_ORDER", UUID.randomUUID().toString(), "Mensagem numero" + 1, newOrderMain::callback);
-				kafkaDispatcher.send("ECOMMERCE_SEND_EMAIL", UUID.randomUUID().toString(), "Mensagem numero" + 1, newOrderMain::callback);
+				var newOrderMain = new NewOrderMain();
+				for (int i = 0; i < 10; i++) {
+					var userId = UUID.randomUUID().toString();
+					var orderId = UUID.randomUUID().toString();
+					var amount = new BigDecimal(Math.random() * 5000 + 1);
+					var order = new Order(userId, orderId, amount);
+					kafkaDispatcherOrder.send("ECOMMERCE_NEW_ORDER", userId, order, newOrderMain::callback);
+
+					var email = "Thank you for your order!";
+					kafkaDispatcherEmail.send("ECOMMERCE_SEND_EMAIL", userId, email, newOrderMain::callback);
+				}
 			}
 		}
 
