@@ -11,7 +11,7 @@ public class NewOrderMain {
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 
 		try(var kafkaDispatcherOrder = new KafkaDispatcher<Order>()) {
-			try(var kafkaDispatcherEmail = new KafkaDispatcher<String>()) {
+			try(var kafkaDispatcherEmail = new KafkaDispatcher<Email>()) {
 
 				var newOrderMain = new NewOrderMain();
 				for (int i = 0; i < 10; i++) {
@@ -21,7 +21,7 @@ public class NewOrderMain {
 					var order = new Order(userId, orderId, amount);
 					kafkaDispatcherOrder.send("ECOMMERCE_NEW_ORDER", userId, order, newOrderMain::callback);
 
-					var email = "Thank you for your order!";
+					var email = new Email("lcsd.lucas@gmail.com", "todos@todos.com.br", "Congrats!","Thank you for your order!");
 					kafkaDispatcherEmail.send("ECOMMERCE_SEND_EMAIL", userId, email, newOrderMain::callback);
 				}
 			}
