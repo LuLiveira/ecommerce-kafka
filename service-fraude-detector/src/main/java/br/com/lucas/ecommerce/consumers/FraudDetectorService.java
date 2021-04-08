@@ -36,16 +36,16 @@ public class FraudDetectorService {
 			System.out.println(record.offset());
 		System.out.println("-------------ORDER-----------");
 			Order order = record.value();
-			System.out.println("User id >>>>> " + order.getUserId());
+			System.out.println("User email >>>>> " + order.getEmail());
 			System.out.println("Order id >>>>> " + order.getOrderId());
 			System.out.println("Amount >>>>> " + order.getAmount());
 
 			if(isFraud(order)){
 				System.out.println("Fraude.");
-				orderDispatcher.send("ECOMMERCE_ORDER_REJECTED", order.getUserId(), order, (success, failure) -> {});
+				orderDispatcher.send("ECOMMERCE_ORDER_REJECTED", order.getEmail(), order, (success, failure) -> {});
 			}else {
 				System.out.println("Aprovada.");
-				orderDispatcher.send("ECOMMERCE_ORDER_APPROVED", order.getUserId(), order, (success, failure) -> {});
+				orderDispatcher.send("ECOMMERCE_ORDER_APPROVED", order.getEmail(), order, (success, failure) -> {});
 			}
 
 		System.out.println("Fim do processamento.");

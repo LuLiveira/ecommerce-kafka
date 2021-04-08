@@ -18,14 +18,14 @@ public class NewOrderMain {
 
 				var newOrderMain = new NewOrderMain();
 				for (int i = 0; i < 10; i++) {
-					var userId = UUID.randomUUID().toString();
+					var email = Math.random() + "@email.com";
 					var orderId = UUID.randomUUID().toString();
 					var amount = new BigDecimal(Math.random() * 5000 + 1);
-					var order = new Order(userId, orderId, amount);
-					kafkaDispatcherOrder.send("ECOMMERCE_NEW_ORDER", userId, order, newOrderMain::callback);
+					var order = new Order(email, orderId, amount);
+					kafkaDispatcherOrder.send("ECOMMERCE_NEW_ORDER", email, order, newOrderMain::callback);
 
-					var email = new Email("lcsd.lucas@gmail.com", "todos@todos.com.br", "Congrats!","Thank you for your order!");
-					kafkaDispatcherEmail.send("ECOMMERCE_SEND_EMAIL", userId, email, newOrderMain::callback);
+					var emailSend = new Email("lcsd.lucas@gmail.com", "todos@todos.com.br", "Congrats!","Thank you for your order!");
+					kafkaDispatcherEmail.send("ECOMMERCE_SEND_EMAIL", email, emailSend, newOrderMain::callback);
 				}
 			}
 		}
