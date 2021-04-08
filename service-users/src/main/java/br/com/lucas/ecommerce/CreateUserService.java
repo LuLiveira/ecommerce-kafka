@@ -58,6 +58,8 @@ public class CreateUserService {
             ps.setString(2, email);
             
             ps.execute();
+
+            System.out.println("Usuário inserido");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

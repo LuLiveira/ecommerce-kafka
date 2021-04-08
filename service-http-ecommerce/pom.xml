@@ -9,24 +9,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>service-new-order</artifactId>
+    <artifactId>service-http-ecommerce</artifactId>
+
     <dependencies>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+        </dependency>
         <dependency>
             <groupId>br.com.lucas.ecommerce</groupId>
             <artifactId>common-kafka</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-servlet</artifactId>
-            <version>9.4.23.v20191118</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
