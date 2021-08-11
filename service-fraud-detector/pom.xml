@@ -9,8 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>service-users</artifactId>
-
+    <artifactId>service-fraud-detector</artifactId>
     <dependencies>
         <dependency>
             <groupId>br.com.alura</groupId>
